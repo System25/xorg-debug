@@ -1,0 +1,36 @@
+#!/bin/sh
+
+#GDB=...
+XSERVER=/usr/lib/xorg/Xorg
+
+ARGS=$*
+PID=$$
+LOGDIR=/var/log
+TIME=`date +%Y%m%d%H%M%S`
+
+test -z "$GDB" && GDB=gdb
+test -z "$XSERVER" && XSERVER=/usr/bin/Xorg
+
+if [ $USER != 'root' ]
+then
+    exec sudo $0
+fi
+
+# Delete old logs
+find /var/log -name "gdb_log*" -type f -mtime +30 -exec rm -f {} \;
+
+cat > /tmp/.dbgfile.$PID << HERE
+cont
+bt full
+cont
+quit
+HERE
+
+# Attach gdb to Xorg
+$GDB -p $(pidof $XSERVER) --quiet --command=/tmp/.dbgfile.$PID > $LOGDIR/gdb_log.$TIME.$PID 2>&1 &
+
+sleep 2
+
+rm -f /tmp/.dbgfile.$PID
+echo "Log written to: $LOGDIR/gdb_log.$TIME.$PID"
+

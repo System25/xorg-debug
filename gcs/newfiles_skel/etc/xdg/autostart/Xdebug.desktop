@@ -1,0 +1,13 @@
+[Desktop Entry]
+Name=Xorg debug
+Comment=Uses gdb to debug Xorg
+Exec=/usr/bin/Xdebug
+Terminal=false
+Type=Application
+NotShowIn=KDE;LXDE;Unity;GNOME;
+StartupNotify=false
+X-GNOME-Autostart-Delay=30
+NoDisplay=true
+X-Desktop-File-Install-Version=0.22
+Categories=System;Monitor;GTK;
+Name[es_ES]=Xorg debug

@@ -1,0 +1,40 @@
+
+# Add permissions for all users to run Xdebug
+set +e
+FILE=/etc/sudoers
+
+
+# Lines to add
+LINES0='Cmnd_Alias      XDBGCMD = /usr/bin/Xdebug'
+LINES1='ALL ALL=NOPASSWD: XDBGCMD'
+
+PREVIOUS_LINE=''
+
+i=0
+while [ "$i" -le 1 ]; do
+
+        eval LINE=\$LINES$i
+        if [ "$PREVIOUS_LINE" = "" ]
+	then
+		# Add the first line at the end of the file (if necessary)
+		grep -q "$LINE" "$FILE" || echo "$LINE" >> "$FILE"
+	else
+
+		# Add the other lines after the previous lines  (if necessary)
+		grep -A1 "$PREVIOUS_LINE" "$FILE" | grep "$LINE" > /dev/null
+		if [ $? -ne 0 ]
+		then
+			# The line doesn't exists of doesn't follow the previous line
+			sed -i "\|$LINE|d" "$FILE"
+			sed -i "\|$PREVIOUS_LINE|a $LINE" "$FILE"
+		fi
+
+	fi
+
+	PREVIOUS_LINE=$LINE
+
+    i=$(( i + 1 ))
+done 
+
+
+

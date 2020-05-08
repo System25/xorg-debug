@@ -1,0 +1,28 @@
+# YAML 1.1
+# Fichero de configuración de GDB para depurar Xorg
+
+# Nombre del paquete (minúsculas-separado-con-guiones)
+name: xorg-debug
+
+# Autor 
+author: Abraham Macias Paredes <amacias@gruposolutia.com>
+
+#Priority
+priority: optional
+
+# Section
+section: metapackages
+
+# Descripción corta
+shortdesc: "Configuration files to use gdb to debug Xorg problems."
+
+# Descipción larga, las lineas han de estar separadas por "\n "
+longdesc: "This packages modify some configuration files to use gdb to debug Xorg problems."
+
+
+# Versión del paquete
+version: 1.0
+
+# Cambios en esta versión
+changes:
+    - Initial release.

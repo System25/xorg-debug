@@ -1,0 +1,13 @@
+### depends file
+# File with depends 
+#END
+
+gdb
+xserver-xorg-core-dbg
+xserver-xorg-video-amdgpu-dbg
+xserver-xorg-video-ati-dbg
+xserver-xorg-video-intel-dbg
+xserver-xorg-video-nouveau-dbg
+xserver-xorg-video-radeon-dbg
+
+
